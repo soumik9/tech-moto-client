@@ -4,7 +4,7 @@ import { Container, Row, Spinner } from 'react-bootstrap';
 const Loading = () => {
     return (
         <Container>
-            <Row className='justify-content-center align-items-center h-100vh'>
+            <Row className='justify-content-center align-items-center' style={{ height: '80vh' }}>
                 <Spinner animation="border" variant="info" />
             </Row>
         </Container>

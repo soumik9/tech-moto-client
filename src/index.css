@@ -26,3 +26,12 @@ a{
 .my-50{
   margin: 50px 0;
 }
+
+.tech-btn{
+  background-color: var(--hover-color);
+  color: var(--white-font);
+}
+
+.tech-btn:hover{
+  color: var(--white-font);
+}
