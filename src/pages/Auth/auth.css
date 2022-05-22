@@ -1,0 +1,51 @@
+.auth .card{
+    padding: 50px 20px;
+}
+
+.auth .form__title{
+    color: #069A8E;
+}
+
+.auth .form__btn {
+    width: 100%;
+    background-color: var(--bg-color) !important;
+    border-color: none;
+    color: white !important;
+    padding: 0.7rem 0;
+}
+
+.auth .form__btn:hover {
+    background-color: var(--hover-color) !important;
+    transition: 0.5s ease-in;
+}
+
+.auth .form__btn-icon {
+    font-size: 22px;
+    margin-left: 0.4rem;
+    position: relative;
+    top: -1px;
+}
+
+.auth .form__or-hr {
+    color: var(--hover-color);
+}
+
+.auth .or {
+    font-weight: 600;
+}
+
+.auth .form__detail a {
+    color: #069A8E;
+    text-decoration: none;
+}
+
+.auth .form__detail a:hover {
+    color: var(--hover-color);
+}
+
+.auth .google-btn{
+    font-size: 16px;
+    border: none;
+    color: var(--white-font);
+    background-color: #4285F4;
+}

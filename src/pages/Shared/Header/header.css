@@ -1,0 +1,17 @@
+.navbar{
+    background-color: var(--bg-color) !important;
+}
+
+.navbar-brand{
+    color: var(--white-font) !important;
+}
+
+.navbar .nav-link{
+    color: var(--gray-font) !important;
+    margin: 0 15px;
+}
+
+.navbar .nav-link:hover{
+    color: var(--white-font) !important;
+    
+}

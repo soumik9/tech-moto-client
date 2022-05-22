@@ -2,10 +2,11 @@ import React from 'react';
 import { Container, Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import logo  from '../../../assets/logo.jpg'
+import './header.css'
 
 const Header = () => {
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar expand="lg">
         <Container>
 
             <Navbar.Brand href="#home">
@@ -20,6 +21,7 @@ const Header = () => {
                     <Nav.Link as={ Link } to='/'>Home</Nav.Link>
                     <Nav.Link as={ Link } to='/'>About</Nav.Link>
                     <Nav.Link as={ Link } to='/'>Contact</Nav.Link>
+                    <Nav.Link as={ Link } to='/login'>Login</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Container>
