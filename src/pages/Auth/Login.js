@@ -1,17 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import {FcGoogle} from 'react-icons/fc'
 import { RiLoginCircleLine } from 'react-icons/ri'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
+import toast from 'react-hot-toast';
+import useToken from '../../hooks/useToken';
+import Loading from '../Shared/Loading/Loading';
 import './auth.css'
 
 const Login = () => {
 
     const { register, handleSubmit, formState: { errors }, } = useForm();
+    const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
+    const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+    const [token] = useToken(user || guser);
 
-    const handleLogin = () => {
+    let loginErrorMessage;
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
 
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+            toast.success('Welcome to dashboard!', { duration: 2000, position: 'top-right' });
+        }
+    }, [token, navigate, from])
+
+    // loading
+    if (loading || gloading) { return <Loading /> }
+
+    // error checking
+    if (error || gerror) {
+        loginErrorMessage = <p className='text-danger text-center mt-4'>{error?.message || gerror?.message}</p>
+    }
+
+    const handleLogin = ({ email, password }) => {
+        signInWithEmailAndPassword(email, password);
     }
 
     return (
@@ -25,7 +53,7 @@ const Login = () => {
                             <div className="d-flex justify-content-center mb-4">
                                 <div className='text-center'>
                                     <h2 className="form__title ">Login</h2>
-                                    {/* {loginErrorMessage} */}
+                                    {loginErrorMessage}
                                 </div>
                             </div>
 
@@ -72,7 +100,7 @@ const Login = () => {
                             {/* social login components */}
                             <div className="form__socials mt-4">
                                 <div>
-                                    <button className='w-100 py-3 google-btn'>
+                                    <button className='w-100 py-3 google-btn' onClick={() => signInWithGoogle()}>
                                         <FcGoogle className='form__socials-icon google__icon me-2' /> Google Sign In
                                     </button>
                                 </div>

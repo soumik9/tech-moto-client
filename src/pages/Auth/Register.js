@@ -8,6 +8,7 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfil
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 import toast from 'react-hot-toast';
+import useToken from '../../hooks/useToken';
 import './auth.css'
 
 const Register = () => {
@@ -16,18 +17,19 @@ const Register = () => {
     const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true});
     const [updateProfile, updating, uerror] = useUpdateProfile(auth);
     const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+    const [token] = useToken(user || guser);
 
     let loginErrorMessage;
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
-
+    
     useEffect( () => {
-        if(user || guser){
+        if(token){
             navigate(from, { replace: true });
             toast.success('User created!', { duration: 2000, position: 'top-right' });
         }
-    }, [user, navigate, from])
+    }, [token, navigate, from])
 
     // if error
     if(error || uerror || gerror){
