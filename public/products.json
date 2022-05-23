@@ -1,0 +1,62 @@
+[
+    {
+        "img": "https://i.ibb.co/CVDxXFL/fuel-tank-cap.jpg",
+        "name": "Bike Fuel Tank Cap",
+        "email": "soumikahammed9@gmail.com",
+        "price": 300,
+        "quantity": 1500,
+        "minimum": 5,
+        "sold": 0,
+        "description": "providing exclusive collection of Petrol Tank Caps for quality conscious customers."
+    },
+    {
+        "img": "https://i.ibb.co/vZ3Kx0Q/self-gear.jpg",
+        "name": "Bike Self Gear",
+        "email": "soumik.ahammed.11@gmail.com",
+        "price": 150,
+        "quantity": 800,
+        "minimum": 15,
+        "sold": 0,
+        "description": "Bike Self Gear, Motorcycle Gear, Motorbike Gear. Get best price with best quality."
+    },
+    {
+        "img": "https://i.ibb.co/rpCMgw0/Wheel-Rim-Spokes.jpg",
+        "name": "Wheel Rim Spokes",
+        "email": "soumik.ahammed.11@gmail.com",
+        "price": 4500,
+        "quantity": 1000,
+        "minimum": 10,
+        "sold": 0,
+        "description": "Find here Motorcycle Rim, Bike Rim manufacturers, suppliers & exporters in world. "
+    },
+    {
+        "img": "https://i.ibb.co/L684Z0L/Fork-Assembly.jpg",
+        "name": "Fork Assembly",
+        "email": "soumik.ahammed.11@gmail.com",
+        "price": 300,
+        "quantity": 1200,
+        "minimum": 8,
+        "sold": 0,
+        "description": "This year we have updated suspension forks from some of our sport's top manufacturers."
+    },
+    {
+        "img": "https://i.ibb.co/TWG5JyV/Universal-Handle-Weight.jpg",
+        "name": "Universal Handle Weight",
+        "email": "soumik.ahammed.11@gmail.com",
+        "price": 5,
+        "quantity": 3000,
+        "minimum": 20,
+        "sold": 0,
+        "description": "New Premium & High Quality Universal Long lasting Bike Handle Weight for Motorcycle."
+    },
+    {
+        "img": "https://i.ibb.co/kq8HryM/Motor-For-Electric-Bike.jpg",
+        "name": "Motor For Electric Bike",
+        "email": "soumik.ahammed.11@gmail.com",
+        "price": 3000,
+        "quantity": 2200,
+        "minimum": 12,
+        "sold": 0,
+        "description": "Best e-bike motors: Everything you need to know. A smart motor with antitheft protection."
+    }
+]

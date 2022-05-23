@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import {FcGoogle} from 'react-icons/fc'
 import { RiLoginCircleLine } from 'react-icons/ri'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';

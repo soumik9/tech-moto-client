@@ -11,7 +11,7 @@ import Rating from './Rating';
 
 const Reviews = () => {
 
-    const { data: reviews, isLoading, refetch } = useQuery('reviews', () => 
+    const { data: reviews, isLoading } = useQuery('reviews', () => 
         fetch(`https://tech-moto-9.herokuapp.com/reviews`)
         .then(res => res.json())
     )
