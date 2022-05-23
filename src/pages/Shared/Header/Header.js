@@ -14,8 +14,6 @@ const Header = () => {
 
     if (loading) { return <Loading /> }
 
-    console.log(user);
-
     const handleLogout = () =>{
         signOut(auth);
         localStorage.removeItem('accessToken');

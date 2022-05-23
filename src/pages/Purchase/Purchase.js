@@ -5,28 +5,37 @@ import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { RiLoginCircleLine } from 'react-icons/ri'
-import { AiOutlinePlusSquare, AiOutlineMinusSquare } from 'react-icons/ai'
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
+import Quantity from './Quantity';
 import './purchase.css'
 
 const Purchase = () => {
 
+   
     const { toolId } = useParams();
     const [user, uloading] = useAuthState(auth);
     const { register, handleSubmit, formState: { errors }, } = useForm();
 
+    
+
     const { data: tool, isLoading } = useQuery('tool', () =>
         fetch(`https://tech-moto-9.herokuapp.com/tool/${toolId}`)
-            .then(res => res.json()))
+        .then(res => res.json()))
 
+    // if data is loading
     if (isLoading || uloading) { return <Loading /> }
 
     const { name, img, price, quantity, minimum, description } = tool;
 
+    // if(minimum){ setOrderQuantity(minimum)}
+
+    //console.log(orderQuantity);
+
     const handlePurchase = () => {
         console.log('ok');
     }
+
 
     return (
         <section className='purchase my-100'>
@@ -67,27 +76,35 @@ const Purchase = () => {
                                 <p class="col-9 col-md-9 col-lg-7">: <span className='tech-title'>{user.email}</span></p>
                             </div>
 
-                            <div className='mt-5'>
-                                <p className='mb-2'>Quantity</p>
-                                <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-danger">
-                                            <AiOutlineMinusSquare className='icon-p' />
-                                        </button>
-                                    </span>
-                                    <input type="number" class="form-control" value={minimum} />
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-success">
-                                            <AiOutlinePlusSquare className='icon-p' />
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
+                            {/* quantiy */}
+                            <Quantity
+                                minimum={minimum}
+                                quantity={quantity}
+                             />
 
 
                             <form onSubmit={handleSubmit(handlePurchase)} className='mt-5'>
 
-                                <div>
+                                {/* <div>
+                                    <Form.Label htmlFor="orderQuantity" className='ps-1'>Quantiy</Form.Label>
+                                    <Form.Control type="text" {...register('orderQuantity', { required: {
+                                            value: true,
+                                            message: 'Order quantity is required.'
+                                        }, minLength: {
+                                            value: {minimum}, 
+                                            message: `Order should be minimum ${minimum} pc`
+                                        }, 
+                                        maxLength: {
+                                            value: {quantity}, 
+                                            message: `Order should be maximum ${quantity} pc`
+                                        }
+                                    })} value={minimum} />
+                                     {errors.orderQuantity?.type === 'required' && <p className='text-error mt-1 text-center'>{errors.password.message}</p>}
+                                    {errors.orderQuantity?.type === 'minLength' && <p className='text-error mt-1 text-center'>{errors.password.message}</p>}
+                                    {errors.orderQuantity?.type === 'maxLength' && <p className='text-error mt-1 text-center'>{errors.password.message}</p>}
+                                </div> */}
+
+                                <div className='mt-4'>
                                     <Form.Label htmlFor="address" className='ps-1'>Address</Form.Label>
                                     <Form.Control type="text" as='textarea' {...register('address', { required: true })} placeholder='Your address' />
                                     {errors.address && <p className='p-0 text-danger text-center'>Address is required.</p>}

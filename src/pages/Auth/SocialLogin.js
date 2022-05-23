@@ -6,7 +6,6 @@ import {FcGoogle} from 'react-icons/fc'
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import useToken from '../../hooks/useToken';
-import Loading from '../Shared/Loading/Loading';
 
 const SocialLogin = () => {
 
