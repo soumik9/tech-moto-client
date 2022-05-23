@@ -14,7 +14,7 @@ const Summary = () => {
     ]
 
     return (
-        <section className='summary my-50'>
+        <section className='summary my-100'>
             <Container>
 
                 <div className="summary__header">
