@@ -22,7 +22,7 @@ const Summary = () => {
                         <Col md={6}>
                             <div className='text-center'>
                                 <h2 className='text-uppercase'>Trusted Bussiness to worldwide</h2>
-                                <p>Best bike parts provider in the world</p>
+                                <p className='tech-title'>Best bike parts provider in the world</p>
                             </div>
                         </Col>
                     </Row>
