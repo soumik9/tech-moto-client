@@ -37,11 +37,11 @@ const Header = () => {
                         <Nav.Link as={Link} to='/'>Home</Nav.Link>
                         <Nav.Link as={Link} to='/blog'>Blog</Nav.Link>
                         <Nav.Link as={Link} to='/'>About</Nav.Link>
-                        <Nav.Link as={Link} to='/'>Contact</Nav.Link>
+                        <Nav.Link as={Link} to='/portfolio'>My Portfolio</Nav.Link>
 
                         {
                             user ? ( <>
-                            <Nav.Link as={Link} to='/my-portfolio'>{ user?.displayName }</Nav.Link>
+                            <Nav.Link as={Link} to='/portfolio'>{ user?.displayName }</Nav.Link>
                             <button
                                 type='button'
                                 className='btn tech-btn'

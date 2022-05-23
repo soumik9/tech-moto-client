@@ -8,6 +8,7 @@ import Register from './pages/Auth/Register';
 import { Toaster } from 'react-hot-toast';
 import Blog from './pages/Blog/Blog';
 import NotFound from './pages/Shared/NotFound/NotFound';
+import Portfolio from './pages/Portfolio/Portfolio';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<NotFound />} />
