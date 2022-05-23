@@ -10,6 +10,7 @@ import Blog from './pages/Blog/Blog';
 import NotFound from './pages/Shared/NotFound/NotFound';
 import Portfolio from './pages/Portfolio/Portfolio';
 import Purchase from './pages/Purchase/Purchase';
+import RequiredAuth from './pages/Shared/RequiredAuth/RequiredAuth';
 
 function App() {
   return (
@@ -20,7 +21,14 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/tool/:toolId" element={<Purchase />} />
+
+        {/* required auth */}
+        <Route path="/tool/:toolId" element={
+          <RequiredAuth>
+            <Purchase />
+          </RequiredAuth>
+        } />
+
         <Route path="/blog" element={<Blog />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/login" element={<Login />} />

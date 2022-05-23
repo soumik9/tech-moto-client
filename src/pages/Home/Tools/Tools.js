@@ -8,10 +8,9 @@ const Tools = () => {
 
     const { data: tools, isLoading } = useQuery('tools', () => 
     fetch(`https://tech-moto-9.herokuapp.com/tools`)
-    .then(res => res.json())
-)
+    .then(res => res.json()))
 
-if(isLoading){return <Loading />}
+    if(isLoading){return <Loading />}
 
     return (
         <section className='summary my-100'>

@@ -1,0 +1,6 @@
+.purchase p {
+    margin: 0;
+}
+.tool-img{
+    border: 1px solid var(--hover-color);
+}
