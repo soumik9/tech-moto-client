@@ -33,7 +33,7 @@ const Summary = () => {
                         {
                             summaries.map(summary => (
                                 <Col md={3}>
-                                <div className="summary__item">
+                                <div className="summary__item mb-5 mb-md-0">
                                     <Card>
                                         <Card.Body className='text-center'>
                                             {summary.icon} 

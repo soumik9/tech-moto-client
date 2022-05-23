@@ -41,5 +41,11 @@ a{
 }
 
 .tech-btn:hover{
+  background-color: #54a0ff;
   color: var(--white-font);
+}
+
+.icon-p{
+  position: relative;
+  margin-top: -2px;
 }
