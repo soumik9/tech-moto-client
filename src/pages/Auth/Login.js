@@ -9,14 +9,14 @@ import auth from '../../firebase.init';
 import toast from 'react-hot-toast';
 import useToken from '../../hooks/useToken';
 import Loading from '../Shared/Loading/Loading';
+import SocialLogin from './SocialLogin';
 import './auth.css'
 
 const Login = () => {
 
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
-    const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
-    const [token] = useToken(user || guser);
+    const [token] = useToken(user);
 
     let loginErrorMessage;
     const navigate = useNavigate();
@@ -31,11 +31,11 @@ const Login = () => {
     }, [token, navigate, from])
 
     // loading
-    if (loading || gloading) { return <Loading /> }
+    if (loading) { return <Loading /> }
 
     // error checking
-    if (error || gerror) {
-        loginErrorMessage = <p className='text-danger text-center mt-4'>{error?.message || gerror?.message}</p>
+    if (error) {
+        loginErrorMessage = <p className='text-danger text-center mt-4'>{error?.message}</p>
     }
 
     const handleLogin = ({ email, password }) => {
@@ -99,11 +99,7 @@ const Login = () => {
 
                             {/* social login components */}
                             <div className="form__socials mt-4">
-                                <div>
-                                    <button className='w-100 py-3 google-btn' onClick={() => signInWithGoogle()}>
-                                        <FcGoogle className='form__socials-icon google__icon me-2' /> Google Sign In
-                                    </button>
-                                </div>
+                                <SocialLogin />
                             </div>
                         </div>
 

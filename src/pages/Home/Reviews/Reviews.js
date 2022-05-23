@@ -67,7 +67,7 @@ const Reviews = () => {
                                 <Row>
                                     {
                                         reviews.map(review => (
-                                            <Col lg={4} md={6}>
+                                            <Col lg={4} md={6} key={review._id}>
                                                 <SwiperSlide>
                                                     <Card>
                                                         <Card.Body>

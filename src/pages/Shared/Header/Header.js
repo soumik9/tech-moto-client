@@ -14,6 +14,8 @@ const Header = () => {
 
     if (loading) { return <Loading /> }
 
+    console.log(user);
+
     const handleLogout = () =>{
         signOut(auth);
         localStorage.removeItem('accessToken');
@@ -38,11 +40,13 @@ const Header = () => {
                         <Nav.Link as={Link} to='/'>Contact</Nav.Link>
 
                         {
-                            user ? <button
+                            user ? ( <>
+                            <Nav.Link as={Link} to='/my-portfolio'>{ user?.displayName }</Nav.Link>
+                            <button
                                 type='button'
                                 className='btn tech-btn'
                                 onClick={handleLogout}
-                            >Logout</button> : <Nav.Link as={Link} to='/login'>Login</Nav.Link>
+                            >Logout</button> </>) : <Nav.Link as={Link} to='/login'>Login</Nav.Link>
                         }
 
 

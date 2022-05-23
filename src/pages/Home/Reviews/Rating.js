@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiFillStar } from 'react-icons/ai'
-import './rating.css'
+import './rating.module.css'
 
 const Rating = ({rating}) => {
 
@@ -8,31 +8,31 @@ const Rating = ({rating}) => {
 
     if(rating === 5){
         return(
-            <div>
+            <div className='rating'>
                 <AiFillStar /> <AiFillStar /> <AiFillStar /> <AiFillStar /> <AiFillStar />
             </div>
         ) 
     }else if(rating === 4){
         return(
-            <div>
+            <div className='rating'>
                 <AiFillStar /> <AiFillStar /> <AiFillStar /> <AiFillStar />
             </div>
         ) 
     }else if(rating === 3){
         return(
-            <div>
+            <div className='rating'>
                 <AiFillStar /> <AiFillStar /> <AiFillStar /> 
             </div>
         ) 
     }else if(rating === 2){
         return(
-            <div>
+            <div className='rating'>
                 <AiFillStar /> <AiFillStar />
             </div>
         ) 
     }else{
         return(
-            <div>
+            <div className='rating'>
                 <AiFillStar />
             </div>
         ) 

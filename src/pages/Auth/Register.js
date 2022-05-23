@@ -1,23 +1,24 @@
 import React, { useEffect } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import {FcGoogle} from 'react-icons/fc'
 import { RiLoginCircleLine } from 'react-icons/ri'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 import toast from 'react-hot-toast';
 import useToken from '../../hooks/useToken';
 import './auth.css'
+import SocialLogin from './SocialLogin';
+import { signOut } from 'firebase/auth';
 
 const Register = () => {
 
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true});
     const [updateProfile, updating, uerror] = useUpdateProfile(auth);
-    const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
-    const [token] = useToken(user || guser);
+
+    const [token] = useToken(user);
 
     let loginErrorMessage;
     const navigate = useNavigate();
@@ -26,18 +27,20 @@ const Register = () => {
     
     useEffect( () => {
         if(token){
-            navigate(from, { replace: true });
-            toast.success('User created!', { duration: 2000, position: 'top-right' });
+            signOut(auth);
+            localStorage.removeItem('accessToken');
+            navigate('/login');
+            toast.success('User created! Login Now', { duration: 2000, position: 'top-right' });
         }
     }, [token, navigate, from])
 
     // if error
-    if(error || uerror || gerror){
-        loginErrorMessage = <p className='text-danger text-center mt-4'>{error?.message || uerror?.message || gerror?.message}</p>
+    if(error || uerror){
+        loginErrorMessage = <p className='text-danger text-center mt-4'>{error?.message || uerror?.message}</p>
     }
 
     // if loading
-    if(loading || updating || gloading) {return <Loading />}
+    if(loading || updating) {return <Loading />}
 
     // create new user
     const handleRegister = async ({ name, email, password }) => {
@@ -106,11 +109,7 @@ const Register = () => {
 
                         {/* social login components */}
                         <div className="form__socials mt-4">
-                            <div>
-                                <button className='w-100 py-3 google-btn' onClick={() => signInWithGoogle()}>
-                                    <FcGoogle className='form__socials-icon google__icon me-2' /> Google Sign In
-                                </button>
-                            </div>
+                            <SocialLogin />
                         </div>
                     </div>
 
