@@ -1,0 +1,30 @@
+[
+    {
+        "img": "https://i.ibb.co/0n1Qr7P/courtney-cook-TSZo17r3m0s-unsplash-1.jpg",
+        "name": "Naifa Zaman",
+        "rank": "Student",
+        "rating": 4,
+        "description": "The company offers health and financial benefits. Well balanced management and leadership throughout the company."
+    },
+    {
+        "img": "https://i.ibb.co/yWzXMnZ/joseph-gonzalez-i-Fg-Rcq-Hznqg-unsplash-1.jpg",
+        "name": "Ikbal Hossain",
+        "rank": "Teacher, Zila School",
+        "rating": 5,
+        "description": "Management was always fair. Nice machines for the most part. good friendly crew and clean."
+    },
+    {
+        "img": "https://i.ibb.co/0VVxr9v/juan-encalada-WC7-KIHo13-Fc-unsplash-1.jpg",
+        "name": "Peoms",
+        "rank": "Freelancher",
+        "rating": 4,
+        "description": "I was happy to see that most of our manufacturing/purchasing follows the lean manufacturing ideas (whatever they are?)."
+    },
+    {
+        "img": "https://i.ibb.co/nPsdh63/ben-parker-Noh-B3-FJSY90-unsplash-1.jpg",
+        "name": "Sawon Saha",
+        "rank": "Manager, Decosta",
+        "rating": 3,
+        "description": "Pull parts production based on customer demand instead of pushing parts through production based on projected demand"
+    }
+]

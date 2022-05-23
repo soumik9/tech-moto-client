@@ -1,0 +1,16 @@
+.img__container{
+    border: 2px solid var(--hover-tarkish);
+    border-radius: 50px;
+    margin-right: 35px;
+}  
+
+.img__container img{
+    width: 110px;
+    max-height: 90px;
+    padding: 2px;
+    border-radius: 50px;
+}
+
+.card__details p{
+    text-align: justify;
+}
