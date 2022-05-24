@@ -40,17 +40,14 @@ function App() {
         <Route path="/register" element={<Register />} />
 
 
-          {/* dashboard routes */}
-          <Route path="/dashboard" element={
+        {/* dashboard routes */}
+        <Route path="/dashboard" element={
               <RequiredAuth> <Dashboard /> </RequiredAuth> }>  
 
           <Route index element={<DashboardContent />}></Route>
           <Route path='add-review' element={<AddReview />}></Route>
           <Route path='my-orders' element={<MyOrders />}></Route>
           <Route path='profile' element={<MyProfile />}></Route>
-
-          
-
 
         </Route>
         {/* dashboard routes */}

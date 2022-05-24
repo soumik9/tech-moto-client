@@ -14,7 +14,7 @@ const Purchase = () => {
 
    
     const { toolId } = useParams();
-    const [user, uloading] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const { register, handleSubmit, formState: { errors }, } = useForm();
 
     
@@ -24,7 +24,7 @@ const Purchase = () => {
         .then(res => res.json()))
 
     // if data is loading
-    if (isLoading || uloading) { return <Loading /> }
+    if (isLoading) { return <Loading /> }
 
     const { name, img, price, quantity, minimum, description } = tool;
 
