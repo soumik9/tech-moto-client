@@ -3,29 +3,39 @@ import { Col, Form, Row } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { RiLoginCircleLine } from 'react-icons/ri'
+import toast from 'react-hot-toast';
+import axios from 'axios';
 import auth from '../../../firebase.init';
 
 const AddReview = () => {
 
-    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [user ] = useAuthState(auth);
 
-    const handleAddReview = (data) => {
-        console.log(data);
+    const handleAddReview = async (data) => {
+        await axios.post(`https://tech-moto-9.herokuapp.com/add-review`, data)
+        .then(response => {
+            if(response.data.insertedId){
+                toast.success('Review Added!', { duration: 2000, position: 'top-right', });
+                reset();
+            }else{
+                toast.error('Faild to Add!', { duration: 2000, position: 'top-right', });
+            }
+        });
     }
 
     return (
-        <div className='card py-5'>
+        <div className='card py-3 py-md-5 mb-5'>
 
             <div className='text-center mb-5' style={{ borderBottom: '1px solid #686DE0' }}>
                 <h3 className='pb-3'>Add a Review</h3>
             </div>
 
             <Row className='justify-content-center'>
-                <Col md={8}>
+                <Col md={8} sm={12}>
 
 
-                    <form onSubmit={handleSubmit(handleAddReview)}>
+                    <form onSubmit={handleSubmit(handleAddReview)} className="px-2 px-md-0">
 
                         <input type="hidden" value={user?.email} {...register('email')} />
                         <input type="hidden" value={user?.displayName} {...register('name')} />

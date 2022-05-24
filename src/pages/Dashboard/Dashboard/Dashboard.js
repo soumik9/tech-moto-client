@@ -1,7 +1,6 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
-import './dashboard.css'
 
 const Dashboard = () => {
 
@@ -26,7 +25,7 @@ const Dashboard = () => {
             <div className="col-md-10 col-8">
                 <Container>
                     <Row>
-                        <Col>
+                        <Col sm={12}>
                             <div className="contents__container mt-4">
                                 <div className='card text-center py-2 mb-5'>
                                     <h1 className='tech-title'>Welcome to dashboard</h1>
