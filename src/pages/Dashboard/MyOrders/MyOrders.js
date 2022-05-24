@@ -17,7 +17,6 @@ const MyOrders = () => {
     if (isLoading) { return <Loading /> }
 
 
-
     return (
         <div>
             <div className='card py-3 py-md-5 mb-5'>
@@ -26,7 +25,7 @@ const MyOrders = () => {
                     <h3 className='pb-3'>My Orders: {myOrders?.length}</h3>
                 </div>
 
-                <Row className='justify-content-center px-3'>
+                <Row className='justify-content-center px-3 g-0'>
                     <Col md={12} sm={12}>
 
                         {
@@ -39,6 +38,8 @@ const MyOrders = () => {
                                             <th>Tool Name</th>
                                             <th>Email</th>
                                             <th>Total</th>
+                                            <th>Status</th>
+                                            <th>Payment</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>

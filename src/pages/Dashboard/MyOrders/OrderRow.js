@@ -3,10 +3,12 @@ import { Button } from 'react-bootstrap';
 import swal from 'sweetalert';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const OrderRow = ({ index, myOrder, refetch }) => {
 
-    const { _id, email, toolName, total, isPaid } = myOrder;
+    let navigate = useNavigate();
+    const { _id, email, toolName, total, isPaid, status } = myOrder;
 
     const handleOrderDelete = async (orderId) => {
 
@@ -42,6 +44,11 @@ const OrderRow = ({ index, myOrder, refetch }) => {
             <td>{toolName}</td>
             <td>{email}</td>
             <td>{total} $</td>
+            <td>{isPaid === 'true' ? status : 'Pay first'} </td>
+            <td>
+                <Button variant='info text-white' onClick={() => navigate(`/dashboard/payment/${_id}`)}>Pay</Button>
+                <p>transaction id</p>
+            </td>
             <td>{isPaid === 'false' ? <Button variant='danger' onClick={() => handleOrderDelete(_id)}>Delete</Button> : 'Already paid'}</td>
 
         </tr>

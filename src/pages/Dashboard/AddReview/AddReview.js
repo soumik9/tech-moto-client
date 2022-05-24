@@ -31,7 +31,7 @@ const AddReview = () => {
                 <h3 className='pb-3'>Add a Review</h3>
             </div>
 
-            <Row className='justify-content-center'>
+            <Row className='justify-content-center g-0'>
                 <Col md={8} sm={12}>
 
 

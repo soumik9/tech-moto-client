@@ -61,7 +61,7 @@ const MyProfile = () => {
                 }
             </div>
 
-            <Row className='justify-content-center'>
+            <Row className='justify-content-center g-0'>
                 <Col md={8} sm={12}>
 
 
