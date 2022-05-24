@@ -14,7 +14,6 @@ import toast from 'react-hot-toast';
 
 const Purchase = () => {
 
-   
     const { toolId } = useParams();
     const [user] = useAuthState(auth);
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -23,35 +22,59 @@ const Purchase = () => {
 
     const { data: tool, isLoading, refetch } = useQuery('tool', () =>
         fetch(`https://tech-moto-9.herokuapp.com/tool/${toolId}`)
-        .then(res =>  res.json()))
+            .then(res => res.json()))
 
     // if data is loading
     if (isLoading) { return <Loading /> }
 
-    const { _id, name, img, price, quantity, minimum, description } = tool;
+    const { _id, name, img, price, quantity, minimum, description, sold } = tool;
 
     let total = newOrderQuantity ? newOrderQuantity * price : minimum * price;
 
     const handlePurchase = async (data) => {
-        const {email, userName, address, mobile, status, isPaid} = data;
+        const { email, userName, address, mobile, status, isPaid } = data;
+        const newQuantity = newOrderQuantity ? quantity - newOrderQuantity : quantity - minimum;
+        const newSold = newOrderQuantity ? sold + newOrderQuantity : sold + minimum;
+
+        // order data
         const order = {
-            email: email, userName: userName, toolName: name, 
-            toolId: _id, total: total, 
-            quantity: newOrderQuantity ? newOrderQuantity : minimum, 
-            address: address, mobile: mobile, status: status, isPaid: isPaid 
+            email: email, userName: userName, toolName: name,
+            toolId: _id, total: total,
+            quantity: newOrderQuantity ? newOrderQuantity : minimum,
+            address: address, mobile: mobile, status: status, isPaid: isPaid
         };
 
+        // new quantity
+        const newToolQuantuty = { newQuantity: newQuantity, newSold: newSold }
+
         await axios.post(`https://tech-moto-9.herokuapp.com/add-order`, order)
-        .then(response => {
-            if(response.data.insertedId){
-                toast.success(`Order for ${name} successfully done`, { duration: 2000, position: 'top-right', });
-                setnewOrderQuantity(0);
-                refetch();
-                reset();
-            }else{
-                toast.error('Faild to order!', { duration: 2000, position: 'top-right', });
-            }
-        });
+            .then(response => {
+                if (response.data.insertedId) {
+                    toast.success(`Order for ${name} successfully done`, { duration: 2000, position: 'top-right', });
+                    setnewOrderQuantity(0);
+                    refetch();
+                    reset();
+
+                    const updateQuantity = async (toolId) => {
+                        console.log(toolId);
+                        await axios.put(`https://tech-moto-9.herokuapp.com/update-tool/${toolId}`, newToolQuantuty)
+                        .then(response => {
+                            console.log(response);
+                            if (response.data.modifiedCount) {
+                                toast.success(`Tool quantity updated`, { duration: 2000, position: 'top-right', });
+                                refetch();
+                            } else {
+                                toast.error('Failed to update quantity!', { duration: 2000, position: 'top-right', });
+                            }
+                        });
+                    }
+
+                    updateQuantity(_id);
+
+                } else {
+                    toast.error('Failed to order!', { duration: 2000, position: 'top-right', });
+                }
+            });
     }
 
 
@@ -102,7 +125,7 @@ const Purchase = () => {
                                 setOrderQuantity={setOrderQuantity}
                                 newOrderQuantity={newOrderQuantity}
                                 setnewOrderQuantity={setnewOrderQuantity}
-                             />
+                            />
 
 
                             <form onSubmit={handleSubmit(handlePurchase)} className='mt-5'>
@@ -128,7 +151,7 @@ const Purchase = () => {
                                     {errors.mobile && <p className='p-0 text-danger text-center'>Mobile number is required.</p>}
                                 </div>
 
-                                <Button className='tech-btn w-100 py-2' type="submit">
+                                <Button className='tech-btn w-100 py-2' type="submit" disabled={quantity < minimum}>
                                     Place Order <RiLoginCircleLine className='icon-p' />
                                 </Button>
 
