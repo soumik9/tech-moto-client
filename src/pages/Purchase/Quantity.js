@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import toast from 'react-hot-toast';
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from 'react-icons/ai'
 
-const Quantity = ({ minimum, quantity }) => {
+const Quantity = ({ minimum, quantity, orderQuantity, setOrderQuantity, newOrderQuantity, setnewOrderQuantity }) => {
 
     let quantityError;
-    const [orderQuantity, setOrderQuantity] = useState(minimum);
+    setOrderQuantity(minimum)
 
     const plus = (maximumQuantity) => {
-        if (orderQuantity >= maximumQuantity) {
+        if (newOrderQuantity? newOrderQuantity >= maximumQuantity : orderQuantity >= maximumQuantity) {
             toast.error(`Order should be maximum ${maximumQuantity} pc`, { duration: 2000, position: 'top-right' });
         } else {
-            setOrderQuantity(orderQuantity + 1);
+            setnewOrderQuantity(newOrderQuantity ? newOrderQuantity + 1 : orderQuantity + 1);
         }
     }
 
     const minus = (minimumQuantity) => {
-        if (orderQuantity === minimumQuantity) {
+        if (newOrderQuantity ? newOrderQuantity === minimumQuantity : orderQuantity === minimumQuantity) {
             toast.error(`Order should be minimum ${minimumQuantity} pc`, { duration: 2000, position: 'top-right' });
         } else {
-            setOrderQuantity(orderQuantity - 1);
+            setnewOrderQuantity(newOrderQuantity ? newOrderQuantity - 1 : orderQuantity - 1);
         }
     }
 
@@ -32,7 +32,7 @@ const Quantity = ({ minimum, quantity }) => {
                         <AiOutlineMinusSquare className='icon-p' />
                     </button>
                 </span>
-                <input type="number" className="form-control" value={orderQuantity} />
+                <input type="number" className="form-control" value={newOrderQuantity ? newOrderQuantity : orderQuantity} />
                 <span className="input-group-btn">
                     <button type="button" className="btn btn-success" onClick={() => plus(quantity)}>
                         <AiOutlinePlusSquare className='icon-p' />

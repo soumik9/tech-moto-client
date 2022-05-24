@@ -1,39 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { RiLoginCircleLine } from 'react-icons/ri'
+import axios from 'axios';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 import Quantity from './Quantity';
 import './purchase.css'
+import toast from 'react-hot-toast';
 
 const Purchase = () => {
 
    
     const { toolId } = useParams();
     const [user] = useAuthState(auth);
-    const { register, handleSubmit, formState: { errors }, } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const [orderQuantity, setOrderQuantity] = useState();
+    const [newOrderQuantity, setnewOrderQuantity] = useState();
 
-    
-
-    const { data: tool, isLoading } = useQuery('tool', () =>
+    const { data: tool, isLoading, refetch } = useQuery('tool', () =>
         fetch(`https://tech-moto-9.herokuapp.com/tool/${toolId}`)
-        .then(res => res.json()))
+        .then(res =>  res.json()))
 
     // if data is loading
     if (isLoading) { return <Loading /> }
 
-    const { name, img, price, quantity, minimum, description } = tool;
+    const { _id, name, img, price, quantity, minimum, description } = tool;
 
-    // if(minimum){ setOrderQuantity(minimum)}
+    let total = newOrderQuantity ? newOrderQuantity * price : minimum * price;
 
-    //console.log(orderQuantity);
+    const handlePurchase = async (data) => {
+        const {email, userName, address, mobile, status, isPaid} = data;
+        const order = {
+            email: email, userName: userName, toolName: name, 
+            toolId: _id, total: total, 
+            quantity: newOrderQuantity ? newOrderQuantity : minimum, 
+            address: address, mobile: mobile, status: status, isPaid: isPaid 
+        };
 
-    const handlePurchase = () => {
-        console.log('ok');
+        await axios.post(`https://tech-moto-9.herokuapp.com/add-order`, order)
+        .then(response => {
+            if(response.data.insertedId){
+                toast.success(`Order for ${name} successfully done`, { duration: 2000, position: 'top-right', });
+                setnewOrderQuantity(0);
+                refetch();
+                reset();
+            }else{
+                toast.error('Faild to order!', { duration: 2000, position: 'top-right', });
+            }
+        });
     }
 
 
@@ -80,30 +98,24 @@ const Purchase = () => {
                             <Quantity
                                 minimum={minimum}
                                 quantity={quantity}
+                                orderQuantity={orderQuantity}
+                                setOrderQuantity={setOrderQuantity}
+                                newOrderQuantity={newOrderQuantity}
+                                setnewOrderQuantity={setnewOrderQuantity}
                              />
 
 
                             <form onSubmit={handleSubmit(handlePurchase)} className='mt-5'>
 
-                                {/* <div>
-                                    <Form.Label htmlFor="orderQuantity" className='ps-1'>Quantiy</Form.Label>
-                                    <Form.Control type="text" {...register('orderQuantity', { required: {
-                                            value: true,
-                                            message: 'Order quantity is required.'
-                                        }, minLength: {
-                                            value: {minimum}, 
-                                            message: `Order should be minimum ${minimum} pc`
-                                        }, 
-                                        maxLength: {
-                                            value: {quantity}, 
-                                            message: `Order should be maximum ${quantity} pc`
-                                        }
-                                    })} value={minimum} />
-                                     {errors.orderQuantity?.type === 'required' && <p className='text-error mt-1 text-center'>{errors.password.message}</p>}
-                                    {errors.orderQuantity?.type === 'minLength' && <p className='text-error mt-1 text-center'>{errors.password.message}</p>}
-                                    {errors.orderQuantity?.type === 'maxLength' && <p className='text-error mt-1 text-center'>{errors.password.message}</p>}
-                                </div> */}
+                                <input type="hidden" value={user?.email} {...register('email')} />
+                                <input type="hidden" value={user?.displayName} {...register('userName')} />
+                                <input type="hidden" value="pending" {...register('status')} />
+                                <input type="hidden" value="false" {...register('isPaid')} />
 
+                                <div className='mt-4'>
+                                    <Form.Label htmlFor="total" className='ps-1'>Total Price</Form.Label>
+                                    <Form.Control type="text" disabled {...register('total')} value={total} />
+                                </div>
                                 <div className='mt-4'>
                                     <Form.Label htmlFor="address" className='ps-1'>Address</Form.Label>
                                     <Form.Control type="text" as='textarea' {...register('address', { required: true })} placeholder='Your address' />
