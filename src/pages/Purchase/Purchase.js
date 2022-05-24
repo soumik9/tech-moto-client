@@ -22,7 +22,7 @@ const Purchase = () => {
 
     const { data: tool, isLoading, refetch } = useQuery('tool', () =>
         fetch(`https://tech-moto-9.herokuapp.com/tool/${toolId}`)
-            .then(res => res.json()))
+        .then(res => res.json()))
 
     // if data is loading
     if (isLoading) { return <Loading /> }
@@ -56,7 +56,6 @@ const Purchase = () => {
                     reset();
 
                     const updateQuantity = async (toolId) => {
-                        console.log(toolId);
                         await axios.put(`https://tech-moto-9.herokuapp.com/update-tool/${toolId}`, newToolQuantuty)
                         .then(response => {
                             console.log(response);
