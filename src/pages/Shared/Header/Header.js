@@ -39,6 +39,7 @@ const Header = () => {
 
                         {
                             user ? ( <>
+                            <Nav.Link as={Link} to='/dashboard'>Dashboard</Nav.Link>
                             <Nav.Link as={Link} to='/portfolio'>{ user?.displayName }</Nav.Link>
                             <button
                                 type='button'
