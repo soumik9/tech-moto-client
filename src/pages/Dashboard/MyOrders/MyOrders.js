@@ -29,7 +29,7 @@ const MyOrders = () => {
                     <Col md={12} sm={12}>
 
                         {
-                            !myOrders ? <p className='text-danger'>You have no orders</p> : <>
+                            !myOrders.length ? <p className='text-danger text-center'>You have no orders</p> : <>
 
                                 <Table responsive className='align-middle'>
                                     <thead>
