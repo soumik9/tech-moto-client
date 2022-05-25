@@ -10,9 +10,7 @@ import './header.css'
 
 const Header = () => {
 
-    const [user, loading] = useAuthState(auth);
-
-    // if (loading) { return <Loading /> }
+    const [user] = useAuthState(auth);
 
     const handleLogout = () =>{
         signOut(auth);
@@ -34,7 +32,6 @@ const Header = () => {
                     <Nav className="ms-auto">
                         <Nav.Link as={Link} to='/'>Home</Nav.Link>
                         <Nav.Link as={Link} to='/blog'>Blog</Nav.Link>
-                        <Nav.Link as={Link} to='/'>About</Nav.Link>
                         <Nav.Link as={Link} to='/portfolio'>My Portfolio</Nav.Link>
 
                         {

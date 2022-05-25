@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 const OrderRow = ({ index, myOrder, refetch }) => {
 
     let navigate = useNavigate();
-    const { _id, email, toolName, total, isPaid, status, quantity, transactionId } = myOrder;
+    const { _id, email, toolName, total, isPaid, status, transactionId } = myOrder;
 
     const handleOrderDelete = async (orderId) => {
 

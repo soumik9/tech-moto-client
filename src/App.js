@@ -23,6 +23,7 @@ import ManageTools from './pages/Dashboard/ManageTools/ManageTools';
 import AddTool from './pages/Dashboard/AddTool/AddTool';
 import RequiredAdmin from './pages/Shared/RequiredAdmin/RequiredAdmin';
 import RequiredUser from './pages/Shared/RequiredUser/RequiredUser';
+import ResetPassword from './pages/Auth/ResetPassword';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/reset" element={<ResetPassword />} />
 
 
         {/* dashboard routes */}

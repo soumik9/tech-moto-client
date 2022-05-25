@@ -17,7 +17,7 @@ const Payment = () => {
     let {orderId} = useParams();
     let navigate = useNavigate();
 
-    const { data: order, isLoading, refetch } = useQuery('payOrder', () =>
+    const { data: order, isLoading } = useQuery('payOrder', () =>
         fetch(`https://tech-moto-9.herokuapp.com/order/${orderId}`, {
             headers: {
                 'content-type': 'application/json',
@@ -43,7 +43,15 @@ const Payment = () => {
             <h3 className='pb-3'>Hello, <span className='tech-title'>{order.userName}</span></h3>
             <div className='d-flex justify-content-center'>
                 <div><p className='me-3'>Pay for: <span className='tech-title'>{orderId}</span></p></div>
+                <div><p>Email: <span className='tech-title'>{order.email}</span></p></div>
+            </div>
+            <div className='d-flex justify-content-center'>
+                <div><p className='me-3'>Order Quantity: <span className='tech-title'>{order.quantity}</span></p></div>
                 <div><p>Tool Name: <span className='tech-title'>{order.toolName}</span></p></div>
+            </div>
+            <div className='d-flex justify-content-center'>
+                <div><p className='me-3'>Address: <span className='tech-title'>{order.address}</span></p></div>
+                <div><p>Mobile: <span className='tech-title'>{order.mobile}</span></p></div>
             </div>
         </div>
 

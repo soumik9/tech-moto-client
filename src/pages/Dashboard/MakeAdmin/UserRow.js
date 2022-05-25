@@ -41,7 +41,7 @@ const UserRow = ({index, user, refetch}) => {
     return (
         <tr>
             <td>{index + 1}</td>
-            <td>{name}</td>
+            <td>{name ? name : 'Login to update name'}</td>
             <td>{email}</td>
             <td>{role === 'user' ? <Button variant='info text-white' onClick={() => handleAdmin(_id)}>Make Admin</Button> : 'Already Admin'}</td>
 

@@ -92,6 +92,7 @@ const Login = () => {
                             <div className="form__detail mt-3 d-flex justify-content-center">
                                 <div>
                                     <p>If you haven't account <Link to="/register">Create account here</Link></p>
+                                    <p className='text-center'>Forget Password <Link to="/reset">Reset here</Link></p>
                                 </div>
                             </div>
 

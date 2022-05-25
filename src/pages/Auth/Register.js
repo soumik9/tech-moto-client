@@ -1,29 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { RiLoginCircleLine } from 'react-icons/ri'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { signOut } from 'firebase/auth';
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading/Loading';
 import toast from 'react-hot-toast';
 import useToken from '../../hooks/useToken';
-import './auth.css'
 import SocialLogin from './SocialLogin';
-import { signOut } from 'firebase/auth';
+import './auth.css'
+
 
 const Register = () => {
 
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true});
     const [updateProfile, updating, uerror] = useUpdateProfile(auth);
+    const [getUser, setGetUser] = useState('');
 
-    const [token] = useToken(user);
+    const [token] = useToken(user, getUser);
 
     let loginErrorMessage;
     const navigate = useNavigate();
-    const location = useLocation();
-    let from = location.state?.from?.pathname || "/";
     
     useEffect( () => {
         if(token){
@@ -32,7 +32,7 @@ const Register = () => {
             navigate('/login');
             toast.success('User created! Login Now', { duration: 2000, position: 'top-right' });
         }
-    }, [token, navigate, from])
+    }, [token, navigate])
 
     // if error
     if(error || uerror){
