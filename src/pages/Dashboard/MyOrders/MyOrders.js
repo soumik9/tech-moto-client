@@ -12,10 +12,9 @@ const MyOrders = () => {
 
     const { data: myOrders, isLoading, refetch } = useQuery('myOrders', () =>
         fetch(`https://tech-moto-9.herokuapp.com/orders/${user?.email}`)
-            .then(res => res.json()))
+        .then(res => res.json()))
 
     if (isLoading) { return <Loading /> }
-
 
     return (
         <div>

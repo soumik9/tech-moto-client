@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Spinner } from 'react-bootstrap';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import toast from 'react-hot-toast';
 import {FcGoogle} from 'react-icons/fc'
 import { useLocation, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import auth from '../../firebase.init';
 import useToken from '../../hooks/useToken';
 
 const SocialLogin = () => {
 
     const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
-    const [token] = useToken(guser);
+    const [getUser, setGetUser] = useState('');
+    const [token] = useToken(guser, getUser);
 
     let loginErrorMessage;
     const navigate = useNavigate();
@@ -36,10 +37,21 @@ const SocialLogin = () => {
         </Row>
     )}
 
+    if(guser){
+        console.log(guser?.user?.email);
+        fetch(`https://tech-moto-9.herokuapp.com/user/${guser?.user?.email}`)
+        .then(res =>  res.json())
+        .then(data => setGetUser(data));
+    }
+
+    const handleGoogleLogin = () => {
+        signInWithGoogle()
+    }
+
     return (
         <div>
             {loginErrorMessage}
-            <button className='w-100 py-3 google-btn' onClick={() => signInWithGoogle()}>
+            <button className='w-100 py-3 google-btn' onClick={handleGoogleLogin}>
                 <FcGoogle className='form__socials-icon google__icon me-2' /> Google Sign In
             </button>
         </div>

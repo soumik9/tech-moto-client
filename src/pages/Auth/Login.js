@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
@@ -15,7 +15,8 @@ const Login = () => {
 
     const { register, handleSubmit, formState: { errors }, } = useForm();
     const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
-    const [token] = useToken(user);
+    const [getUser, setGetUser] = useState('');
+    const [token] = useToken(user, getUser);
 
     let loginErrorMessage;
     const navigate = useNavigate();
@@ -39,6 +40,10 @@ const Login = () => {
 
     const handleLogin = ({ email, password }) => {
         signInWithEmailAndPassword(email, password);
+    
+        fetch(`https://tech-moto-9.herokuapp.com/user/${email}`)
+        .then(res =>  res.json())
+        .then(data => setGetUser(data));
     }
 
     return (
