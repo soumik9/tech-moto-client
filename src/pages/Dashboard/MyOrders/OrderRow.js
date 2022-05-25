@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 const OrderRow = ({ index, myOrder, refetch }) => {
 
     let navigate = useNavigate();
-    const { _id, email, toolName, total, isPaid, status } = myOrder;
+    const { _id, email, toolName, total, isPaid, status, quantity, transactionId } = myOrder;
 
     const handleOrderDelete = async (orderId) => {
 
@@ -44,10 +44,12 @@ const OrderRow = ({ index, myOrder, refetch }) => {
             <td>{toolName}</td>
             <td>{email}</td>
             <td>{total} $</td>
-            <td>{isPaid === 'true' ? status : 'Pay first'} </td>
             <td>
-                <Button variant='info text-white' onClick={() => navigate(`/dashboard/payment/${_id}`)}>Pay</Button>
-                <p>transaction id</p>
+                <p>{isPaid === 'true' ? status : 'Pay first'}</p>
+                {isPaid === 'true' && <p>Transaction Id: {transactionId}</p> }
+            </td>
+            <td>
+                <Button variant='info text-white' disabled={isPaid === 'true'} onClick={() => navigate(`/dashboard/payment/${_id}`)}>Pay</Button>
             </td>
             <td>{isPaid === 'false' ? <Button variant='danger' onClick={() => handleOrderDelete(_id)}>Delete</Button> : 'Already paid'}</td>
 
