@@ -53,7 +53,7 @@ const Dashboard = () => {
             </div>
 
             <div className="col-md-10 col-8">
-                <Container>
+                <Container className='px-3'>
                     <Row className='g-0'>
                         <Col sm={12}>
                             <div className="contents__container mt-4">
