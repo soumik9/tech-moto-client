@@ -3,9 +3,10 @@ import { Col, Form, Row } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { RiLoginCircleLine } from 'react-icons/ri'
+import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
 import axios from 'axios';
 import auth from '../../../firebase.init';
-import { async } from '@firebase/util';
 import toast from 'react-hot-toast';
 
 const AddTool = () => {
@@ -13,6 +14,7 @@ const AddTool = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [user ] = useAuthState(auth);
     const imgStorageKey = '9536834f24e13107c187d1316c96427d';
+    let navigate = useNavigate();
 
     const handleAddTool = (data) => {
         const {email, name, quantity, minimum, price, description} = data;
@@ -43,11 +45,18 @@ const AddTool = () => {
                         }
                     })
                     .then(response => {
-                        if(response.data.insertedId){
-                            toast.success('New tool added!', { duration: 2000, position: 'top-right', });
-                            reset();
+                        if(response.status === 401 || response.status === 401){
+                            signOut(auth);
+                            localStorage.removeItem('accessToken');
+                            navigate('/login')
+                            toast.error('Forbidden/Unauthorized access!', { duration: 2000, position: 'top-right', });
                         }else{
-                            toast.error('Faild to Add!', { duration: 2000, position: 'top-right', });
+                            if(response.data.insertedId){
+                                toast.success('New tool added!', { duration: 2000, position: 'top-right', });
+                                reset();
+                            }else{
+                                toast.error('Faild to Add!', { duration: 2000, position: 'top-right', });
+                            }
                         }
                     });
                 }

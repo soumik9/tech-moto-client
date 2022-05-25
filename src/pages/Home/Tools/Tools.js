@@ -30,7 +30,7 @@ const Tools = () => {
             <div className="summary__body mt-5">
                 <Row className='gx-3 gy-5'>
                     {
-                        tools.map(tool => <Tool
+                        tools.slice(0, 6).map(tool => <Tool
                             key={tool._id}
                             tool={tool}
                         ></Tool>)

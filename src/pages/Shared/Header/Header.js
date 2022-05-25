@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom'
 import { signOut } from 'firebase/auth';
 import logo from '../../../assets/logo.jpg'
 import auth from '../../../firebase.init';
-import Loading from '../Loading/Loading';
+// import Loading from '../Loading/Loading';
 import './header.css'
 
 const Header = () => {
 
     const [user, loading] = useAuthState(auth);
 
-    if (loading) { return <Loading /> }
+    // if (loading) { return <Loading /> }
 
     const handleLogout = () =>{
         signOut(auth);

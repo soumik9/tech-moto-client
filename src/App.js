@@ -56,7 +56,7 @@ function App() {
           {/* user routes */}
           <Route path='add-review' element={<RequiredUser><AddReview /></RequiredUser> }></Route>
           <Route path='my-orders' element={<RequiredUser><MyOrders /></RequiredUser>}></Route>
-          <Route path='payment/:toolId' element={<RequiredUser><Payment /></RequiredUser>}></Route>
+          <Route path='payment/:orderId' element={<RequiredUser><Payment /></RequiredUser>}></Route>
 
           {/* admin routes */}
           <Route path='all-orders' element={<RequiredAdmin><AllOrders /></RequiredAdmin>}></Route>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiFillStar } from 'react-icons/ai'
-import './rating.module.css'
+import './rating.css'
 
 const Rating = ({rating}) => {
 

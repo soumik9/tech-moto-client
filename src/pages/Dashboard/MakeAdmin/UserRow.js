@@ -24,6 +24,7 @@ const UserRow = ({index, user, refetch}) => {
         .then(response => {
             if(response.status === 401 || response.status === 401){
                 signOut(auth);
+                localStorage.removeItem('accessToken');
                 navigate('/login')
                 toast.error('Forbidden/Unauthorized access!', { duration: 2000, position: 'top-right', });
             }else{

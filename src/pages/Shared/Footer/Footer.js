@@ -37,11 +37,11 @@ const Footer = () => {
                         <div className="footer__container__links__section">
                             <ul className='text-center text-lg-start'>
                                 <li><a href="#footer">Our products</a></li>
-                                <li><a href="#footer">Nazirshail Rice</a></li>
-                                <li><a href="#footer">Chinigura Rice</a> </li>
-                                <li><a href="#footer">Paijam Rice</a> </li>
-                                <li><a href="#footer">Miniket Rice</a></li>
-                                <li><a href="#footer">Basmati Rice</a></li>
+                                <li><a href="#footer">Self Gear</a></li>
+                                <li><a href="#footer">Wheel Rim Spokes</a> </li>
+                                <li><a href="#footer">Fuel Tank Cap</a> </li>
+                                <li><a href="#footer">Fork Assembly</a></li>
+                                <li><a href="#footer">Handle Weight</a></li>
                             </ul>
                         </div>
                     </Col>
