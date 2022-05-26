@@ -1,18 +1,35 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 import OrderRow from './OrderRow';
 
 const MyOrders = () => {
 
+    let navigate = useNavigate();
     const [user] = useAuthState(auth);
 
     const { data: myOrders, isLoading, refetch } = useQuery('myOrders', () =>
-        fetch(`https://tech-moto-9.herokuapp.com/orders/${user?.email}`)
-        .then(res => res.json()))
+        fetch(`https://tech-moto-9.herokuapp.com/orders/${user?.email}`, {
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+        .then(res => {
+            if(res.status === 401 || res.status === 401){
+                signOut(auth);
+                localStorage.removeItem('accessToken');
+                navigate('/login')
+                toast.error('Forbidden/Unauthorized access!', { duration: 2000, position: 'top-right', });
+            }
+            return res.json();
+        }))
 
     if (isLoading) { return <Loading /> }
 

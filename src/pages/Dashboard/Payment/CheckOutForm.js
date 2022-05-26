@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../Shared/Loading/Loading';
 import auth from '../../../firebase.init';
 import toast from 'react-hot-toast';
 
@@ -42,6 +43,8 @@ const CheckOutForm = ({ order }) => {
             }
         })
     }, [total, navigate]);
+
+    if(processing){return <Loading />}
 
     const handlePayment = async (event) => {
         event.preventDefault();
