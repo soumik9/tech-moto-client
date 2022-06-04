@@ -44,8 +44,6 @@ const CheckOutForm = ({ order }) => {
         })
     }, [total, navigate]);
 
-    if(processing){return <Loading />}
-
     const handlePayment = async (event) => {
         event.preventDefault();
 
