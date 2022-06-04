@@ -13,7 +13,7 @@ const Contact = () => {
     }
 
     return (
-        <section className='contact py-5'>
+        <section className='contact py-5' id="contact">
             <Container>
 
                 <div className="contact__header">
