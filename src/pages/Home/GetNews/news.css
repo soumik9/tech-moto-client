@@ -1,0 +1,16 @@
+.newsletter {
+    background: #19beda;
+    padding: 80px 0px;
+}
+.newsletter .form-control:focus {
+    box-shadow: none;
+    border: 2px solid #243c4f;
+}
+
+.newsletter .btn {
+    min-height: 50px;
+    border-radius: 0;
+    background: #243c4f;
+    color: #fff;
+    font-weight: 600;
+}

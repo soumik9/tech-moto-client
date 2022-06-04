@@ -11,32 +11,32 @@ import Rating from './Rating';
 
 const Reviews = () => {
 
-    const { data: reviews, isLoading } = useQuery('reviews', () => 
+    const { data: reviews, isLoading } = useQuery('reviews', () =>
         fetch(`https://tech-moto-9.herokuapp.com/reviews`)
-        .then(res => res.json())
+            .then(res => res.json())
     )
 
-    if(isLoading){return <Loading />}
+    if (isLoading) { return <Loading /> }
 
 
     return (
         <section className='reviews my-100'>
-        <Container>
+            <Container>
 
-            <div className="review__header">
-                <Row className='justify-content-center'>
-                    <Col md={6}>
-                        <div className='text-center'>
-                            <h2 className='text-uppercase'>Reviews from our customers</h2>
-                            <p className='tech-title'>Feedback & Reviews</p>
-                        </div>
-                    </Col>
-                </Row>
-            </div>
+                <div className="review__header">
+                    <Row className='justify-content-center'>
+                        <Col md={6}>
+                            <div className='text-center'>
+                                <h2 className='text-uppercase'>Reviews from our customers</h2>
+                                <p className='tech-title'>Feedback & Reviews</p>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
 
-            <div className="review__body mt-5">
-                <Row>
-                <Col md={12}>
+                <div className="review__body mt-5">
+                    <Row>
+                        <Col md={12}>
                             <Swiper
                                 slidesPerView={3}
                                 spaceBetween={30}
@@ -76,7 +76,7 @@ const Reviews = () => {
                                                                 <div>
                                                                     <h3>{review.name}</h3>
                                                                     <small className='tech-title'>{review.rank}</small>
-                                                                    <small><Rating 
+                                                                    <small><Rating
                                                                         rating={review.rating}
                                                                     ></Rating></small>
                                                                 </div>
@@ -95,11 +95,11 @@ const Reviews = () => {
 
                             </Swiper>
                         </Col>
-                </Row>
-            </div>
+                    </Row>
+                </div>
 
-        </Container>
-    </section>
+            </Container>
+        </section>
     );
 };
 
